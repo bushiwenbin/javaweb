@@ -55,7 +55,8 @@ ssh-keygen -t rsa -b 4096 -C "484360835@qq.com" -f "$env:USERPROFILE\.ssh\id_rsa
 | 未纳入提交 | `.workbuddy/memory/`（本地 AI 助手记忆，含本机路径），如需纳入见下方命令 |
 | 工作区状态 | 干净，`git status` 无未提交改动 |
 | SSH 认证 | ✅ 2026-10-23 通过，`ssh -T git@github.com` 返回 `Hi bushiwenbin!` |
-| 远程仓库 | **尚未添加**（GitHub 上还没建仓库），所以还不能 push |
+| 远程仓库 | **尚未添加**：`javaweb` 仓库还没在 GitHub 建出来（SSH `ls-remote` 返回 Repository not found，API 也 404） |
+| 推送准备 | 已生成 `推送javaweb.bat`，仓库一建好双击即可推送 |
 
 ### 如果想让 .workbuddy/ 也进仓库
 
@@ -125,6 +126,8 @@ ssh-add "$env:USERPROFILE\.ssh\id_rsa"
 
 ### 第 5 步　首次推送（⬅️ 唯一剩下的一步）
 > 注意：`git init`、`git add .`、`git commit`、`git branch -M main` 本机已执行完毕（见"一·二"），下面只有 `git remote add` 和 `git push` 需要执行。
+
+也可以直接双击本目录的 `推送javaweb.bat`（已配好 `git@github.com:bushiwenbin/javaweb.git`，失败时会提示是"仓库不存在"还是"远程已有提交"，并给出对应命令）。
 先在 GitHub 网页上新建**空仓库**（不要勾选 README / .gitignore / License），然后复制它的 SSH 地址 `git@github.com:bushiwenbin/仓库名.git`：
 
 ```powershell
@@ -259,6 +262,10 @@ powershell -ExecutionPolicy Bypass -File .\fix-github-hosts.ps1
 | 固定 `20.27.177.116`（api.github.com） | ✅ 200，0.19~0.21 秒 |
 
 注意：`asus` 已在管理员组内（`Get-LocalGroupMember Administrators` 可查），所以 UAC 提权可行。
+
+**12:10 复测补充**：进入更彻底的阻断时段后，默认 DNS 与固定 IP `20.27.177.113` **同时超时**（都为 000）。
+这说明 hosts 方案只能解决"部分 IP 被墙"的情况；遇到全面阻断时，只能换网络（手机热点最有效）或开代理。
+SSH 22 端口在同一时段依然可用（推送不受影响），受阻的只有网页。
 想撤销就删掉 hosts 里带"GitHub 加速"标记的那几行，或还原同名 `.bak` 文件。
 
 ### 方案 B：SSH 走 443 端口（公司/校园网常封 22 端口）
