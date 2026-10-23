@@ -1,11 +1,11 @@
-﻿# GitHub SSH 配置进度与后续步骤
+# GitHub SSH 配置进度与后续步骤
 
 > 参考文档：《GitHub 使用手册（SSH 方式）》
-> 保存时间：2026-10-22
+> 保存时间：2026-10-22　最后更新：2026-10-23
 > 账号：bushiwenbin　邮箱：484360835@qq.com
 
-本机连通性检测（TCP 层）：`github.com:22` 可达、`ssh.github.com:22` 可达、`ssh.github.com:443` 可达。
-如果浏览器打不开 github.com，属于 HTTPS/DNS 层问题，换网络或稍后重试即可，本机 SSH 通道本身没问题。
+本机连通性检测：`github.com:22` 可达、`ssh.github.com:443` 可达、`https://github.com` 返回 HTTP 200。
+网络通道本身没问题；若浏览器仍打不开，属于浏览器代理/缓存层面，可换浏览器或清缓存后重试。
 
 ---
 
@@ -38,6 +38,39 @@ ssh-keygen -t rsa -b 4096 -C "484360835@qq.com" -f "$env:USERPROFILE\.ssh\id_rsa
 ```
 
 > 提示：如果在你自己的终端里输入 `git` 提示"无法识别"，重启一次终端即可（PATH 已配置好，只是当前窗口的环境变量是旧的）。
+
+---
+
+## 一·二、本地仓库准备（2026-10-23 完成）
+
+项目目录 `C:\Users\asus\OneDrive\Desktop\javaweb`（Spring Boot + Vue 的 JavaWeb 项目）。
+
+| 项目 | 结果 |
+| --- | --- |
+| 初始化仓库 | 已执行 `git init -b main`，默认分支为 `main` |
+| 首次提交 | 提交信息 `first commit`，共 217 个文件（本文档也在其中） |
+| 提交体积 | 约 16.19 MiB（已排除依赖与构建产物） |
+| `.gitignore` 补充 | 新增 `node_modules/`、`frontend/node_modules/`、`frontend/dist/`、`.workbuddy/` |
+| 已排除的大目录 | `frontend/node_modules`（144.3 MB / 7267 个文件）、`target/`、`.idea/` |
+| 未纳入提交 | `.workbuddy/memory/`（本地 AI 助手记忆，含本机路径），如需纳入见下方命令 |
+| 工作区状态 | 干净，`git status` 无未提交改动 |
+| 远程仓库 | **尚未添加**（GitHub 上还没建仓库），所以还不能 push |
+
+### 如果想让 .workbuddy/ 也进仓库
+
+```powershell
+# 先手动删掉 .gitignore 里的 .workbuddy/ 那一行，然后：
+git add .workbuddy
+git commit -m "add workbuddy memory"
+```
+
+### 远程仓库建好后接上并推送
+
+```powershell
+cd C:\Users\asus\OneDrive\Desktop\javaweb
+git remote add origin git@github.com:bushiwenbin/仓库名.git
+git push -u origin main
+```
 
 ---
 
@@ -168,9 +201,40 @@ git remote set-url origin git@github.com:用户名/仓库名.git
 
 ---
 
-## 六、备选方案：网络受限时
+## 六、网络问题诊断与备选方案
 
-### 方案 A：SSH 走 443 端口（公司/校园网常封 22 端口）
+### 诊断结论（2026-10-23 实测）
+
+| 检测项 | 结果 |
+| --- | --- |
+| DNS 解析 github.com | `20.205.243.166`（该 IP 经常连接超时） |
+| `https://github.com/login` 连续 6 次 | **0 / 6 成功**（全部 8 秒超时） |
+| 换个 IP 再测（`--resolve` 指定） | `20.27.177.113`、`140.82.112/113/114/116.3` 均返回 200 |
+| 稳定性复测 3 次 | `20.27.177.113` 3/3 成功，0.35~0.53 秒 |
+| `api.github.com` / `avatars.githubusercontent.com` / `codeload.github.com` | 正常（200 / 200 / 301） |
+| `raw.githubusercontent.com`、`gist.github.com` | 失败（属 SNI 层阻断，改 hosts 无效） |
+| SSH 22 端口 `ssh -T git@github.com` | **3 / 3 成功握手**（返回 Permission denied 属正常，说明通道通） |
+| SSH 443 端口 `ssh -T -p 443 git@ssh.github.com` | 成功握手 |
+| 系统代理 | 未配置（Direct access） |
+| hosts 文件 | 未被修改过 |
+
+结论：**网页 HTTPS 是间歇性被阻断（时通时不通），SSH 通道一直稳定。**
+所以推送代码没问题，只有"登录网页加公钥"这一步需要网络配合。
+
+### 方案 A（首选）：用 hosts 固定到可用 IP
+
+本目录下的 [fix-github-hosts.ps1](./fix-github-hosts.ps1) 就是干这个的。
+**右键 PowerShell → 以管理员身份运行**，然后：
+
+```powershell
+cd C:\Users\asus\OneDrive\Desktop\javaweb
+powershell -ExecutionPolicy Bypass -File .\fix-github-hosts.ps1
+```
+
+脚本会自动备份 hosts、写入 4 条固定解析（`20.27.177.113 github.com` 等），并刷新 DNS 缓存。
+想撤销就删掉 hosts 里带"GitHub 加速"标记的那几行，或还原同名 `.bak` 文件。
+
+### 方案 B：SSH 走 443 端口（公司/校园网常封 22 端口）
 新建或编辑 `C:\Users\asus\.ssh\config`，加入：
 
 ```plain
@@ -182,7 +246,7 @@ Host github.com
 
 之后照常用 `ssh -T git@github.com` 测试。
 
-### 方案 B：改用 HTTPS + 个人访问令牌（PAT）
+### 方案 C：改用 HTTPS + 个人访问令牌（PAT）
 GitHub 已不支持用账号密码做 HTTPS 推送，需要用 PAT：
 GitHub → Settings → Developer settings → Personal access tokens，生成后：
 
