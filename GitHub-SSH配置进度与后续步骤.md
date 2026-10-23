@@ -55,8 +55,8 @@ ssh-keygen -t rsa -b 4096 -C "484360835@qq.com" -f "$env:USERPROFILE\.ssh\id_rsa
 | 未纳入提交 | `.workbuddy/memory/`（本地 AI 助手记忆，含本机路径），如需纳入见下方命令 |
 | 工作区状态 | 干净，`git status` 无未提交改动 |
 | SSH 认证 | ✅ 2026-10-23 通过，`ssh -T git@github.com` 返回 `Hi bushiwenbin!` |
-| 远程仓库 | **尚未添加**：`javaweb` 仓库还没在 GitHub 建出来（SSH `ls-remote` 返回 Repository not found，API 也 404） |
-| 推送准备 | 已生成 `推送javaweb.bat`，仓库一建好双击即可推送 |
+| 远程仓库 | ✅ 已创建：`git@github.com:bushiwenbin/javaweb.git`，公开仓库（public），默认分支 `main` |
+| 推送结果 | ✅ 2026-10-23 12:14 推送成功；本地与远程 SHA 一致（`d86fe1b`），远程 220 个文件，领先/落后 `0 0` |
 
 ### 如果想让 .workbuddy/ 也进仓库
 
@@ -124,7 +124,7 @@ Start-Service ssh-agent
 ssh-add "$env:USERPROFILE\.ssh\id_rsa"
 ```
 
-### 第 5 步　首次推送（⬅️ 唯一剩下的一步）
+### 第 5 步　首次推送（✅ 2026-10-23 12:14 已完成）
 > 注意：`git init`、`git add .`、`git commit`、`git branch -M main` 本机已执行完毕（见"一·二"），下面只有 `git remote add` 和 `git push` 需要执行。
 
 也可以直接双击本目录的 `推送javaweb.bat`（已配好 `git@github.com:bushiwenbin/javaweb.git`，失败时会提示是"仓库不存在"还是"远程已有提交"，并给出对应命令）。
@@ -296,3 +296,21 @@ git remote set-url origin https://github.com/bushiwenbin/仓库名.git
 1. **账号密码不参与 SSH 配置**：SSH 用密钥认证，不需要 GitHub 密码，本次也没有把密码写入任何文件或配置。
 2. 密码曾经以明文形式发出来过，建议到 <https://github.com/settings/security> 修改一次密码。
 3. 私钥 `C:\Users\asus\.ssh\id_rsa` 绝对不要发给别人或上传到仓库；只有 `id_rsa.pub`（公钥）可以公开。
+
+---
+
+## 九、日常推送（现在起怎么用）
+
+仓库已关联，之后正常改代码后只需要三步：
+
+```powershell
+cd C:\Users\asus\OneDrive\Desktop\javaweb
+git add .
+git commit -m "描述本次改动"
+git push
+```
+
+拉取别人/其他设备的改动：`git pull`
+
+> 注意：网页（github.com）是否打得开不影响推送，推送走 SSH 22 端口；
+> 只有"看网页、建仓库、改设置"才需要网页可访问。
