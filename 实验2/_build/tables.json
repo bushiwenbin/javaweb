@@ -1,0 +1,2 @@
+error: JSON-RPC 错误 -32603: [-16]ListTables failed: document is not opened.
+{"ok": false, "exit_code": 1, "error": "JSON-RPC 错误 -32603: [-16]ListTables failed: document is not opened.", "rpc_code": -32603}

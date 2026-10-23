@@ -1,0 +1,11 @@
+本次实验在实验一的 CTTS 工程骨架上完成了 Controller 层的编写与联调，实现了实训项目列表、按 id 查询详情、分页查询、新增项目四个接口，并通过真实 HTTP 请求逐一验证了 @RequestParam、@PathVariable、@RequestBody 三类参数接收方式，验证结果与预期一致。
+
+主要收获有三点。
+
+其一，理解了请求映射的匹配机制。@RequestMapping 在类上提供统一前缀，方法级注解只需写相对路径；@GetMapping("/{id}") 属于宽匹配，会把任何单段路径都吸进来，因此与路径变量同级的固定名词必须显式声明（如本实验的 /page），否则会被误匹配到详情接口上。
+
+其二，厘清了三种参数注解的分工。@RequestParam 对应 URL 查询串，适合可选的筛选与分页条件，配合 required=false 与 defaultValue 可以避免参数缺失导致的绑定失败；@PathVariable 对应 URL 路径占位符，适合表达资源标识，并会自动完成字符串到目标类型的转换；@RequestBody 对应请求体 JSON，适合结构较复杂的提交数据，必须与 Content-Type: application/json 搭配使用，否则会抛 HttpMediaTypeNotSupportedException。
+
+其三，体会到统一响应与全局异常处理的价值。引入 Result 泛型封装之后，成功与失败返回同一套三段式结构，前端只需判断 code，不必再解析 HTTP 状态码；把 BizException、MethodArgumentNotValidException、ConstraintViolationException、MethodArgumentTypeMismatchException 等异常集中到 @RestControllerAdvice 中处理，Controller 里就只剩下成功路径，代码明显清爽，也避免了默认错误页导致返回结构不一致的问题。
+
+最后，本实验仍有可改进之处：目前接口返回的是内存中的模拟数据，应用一重启数据即丢失，距离真实业务还有差距，下一步应把 Service 的实现换成 MyBatis-Plus 的数据库查询；此外本实验只做了手工调试，缺少对接口的自动化回归测试，后续可以补充 MockMvc 用例，并把参数校验规则与接口文档同步维护，降低前后端联调时的沟通成本。

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="mtTEPhCsocGBfzy3AIY5aC">
+<head data-page-node-id="z5NjyKSKxH7x7tdrKdQ2in">
+<meta charset="UTF-8" data-page-node-id="w60VuDGmz4FYDvk8edzGnE">
+<meta name="viewport" content="width=device-width, initial-scale=1" data-page-node-id="tr1iHWz0xLRddeD0FyfQj9">
+<title>JavaWeb 全栈开发环境 · 配置总览</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1f2329; --sub:#646a73;
+    --line:#e8eaed; --brand:#1470cc; --brand-soft:#eaf3fd;
+    --ok:#1e7b34; --ok-soft:#e8f5e9; --warn:#a8760a; --warn-soft:#fdf5e3;
+    --fe:#3a9c72; --fe-soft:#e9f6f1;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:40px 20px 72px; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+    font-size:14px; line-height:1.7;
+  }
+  .wrap{max-width:960px; margin:0 auto;}
+  header{margin-bottom:28px;}
+  .pill{
+    display:inline-block; background:var(--ok-soft); color:var(--ok);
+    font-weight:700; font-size:12px; letter-spacing:.4px;
+    padding:4px 12px; border-radius:999px; margin-bottom:14px;
+  }
+  h1{font-size:25px; margin:0 0 8px; letter-spacing:-.3px;}
+  header p{margin:0; color:var(--sub);}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:24px 26px; margin-bottom:18px;
+  }
+  h2{
+    font-size:15px; margin:0 0 16px; padding-bottom:12px;
+    border-bottom:1px solid var(--line); letter-spacing:.2px;
+  }
+  h2 span{color:var(--sub); font-weight:400; font-size:12.5px; margin-left:8px;}
+  h3{
+    font-size:13px; margin:18px 0 10px; color:var(--sub);
+    font-weight:600; letter-spacing:.3px;
+  }
+  h3:first-of-type{margin-top:0;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--sub); font-weight:600; font-size:12.5px; background:#fafbfc;}
+  tr:last-child td{border-bottom:none;}
+  td.mono,code,.mono{font-family:Consolas,Monaco,"Courier New",monospace; font-size:12.8px;}
+  code{background:#f2f3f5; color:#c7254e; padding:2px 6px; border-radius:5px;}
+  .path{color:var(--brand); font-weight:600;}
+  pre{
+    background:#fafbfc; border:1px solid var(--line); border-radius:10px;
+    padding:14px 16px; margin:10px 0 0; overflow-x:auto;
+    font-family:Consolas,Monaco,monospace; font-size:12.8px; line-height:1.65; color:#24292f;
+  }
+  .flow{display:flex; align-items:stretch; gap:10px; flex-wrap:wrap; margin:4px 0 6px;}
+  .node{
+    flex:1 1 150px; background:var(--brand-soft); border:1px solid #cfe3f8;
+    border-radius:10px; padding:14px 14px 12px;
+  }
+  .node.fe{background:var(--fe-soft); border-color:#c9e8dc;}
+  .node b{display:block; font-size:13.5px; margin-bottom:3px;}
+  .node small{color:var(--sub); font-size:12px; line-height:1.5; display:block;}
+  .arrow{align-self:center; color:#b3b8bf; font-size:18px; padding:0 2px;}
+  .steps{counter-reset:s; list-style:none; padding:0; margin:0;}
+  .steps li{
+    counter-increment:s; position:relative; padding-left:38px; margin-bottom:15px;
+  }
+  .steps li:last-child{margin-bottom:0;}
+  .steps li::before{
+    content:counter(s); position:absolute; left:0; top:1px;
+    width:24px; height:24px; border-radius:50%;
+    background:var(--brand); color:#fff; font-size:12.5px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps.fe-step li::before{background:var(--fe);}
+  .steps b{display:block; margin-bottom:2px;}
+  .steps small{color:var(--sub);}
+  .note{
+    background:var(--warn-soft); border:1px solid #f0e0b8; border-radius:10px;
+    padding:14px 18px; font-size:13.3px; color:#5c4a12;
+  }
+  .note + .note{margin-top:12px;}
+  .note b{color:var(--warn);}
+  .kv{display:grid; grid-template-columns:auto 1fr; gap:8px 18px; font-size:13.5px;}
+  .kv dt{color:var(--sub);}
+  .kv dd{margin:0; font-family:Consolas,Monaco,monospace; font-size:12.8px;}
+  footer{text-align:center; color:#9aa0a6; font-size:12.5px; margin-top:26px;}
+</style>
+</head>
+<body data-page-node-id="BTSQ3eyJMj7nyBO03bpSMH">
+<div class="wrap" data-page-node-id="s5nD5noJZK43VeQKCDK4XE">
+
+  <header data-page-node-id="77r1MeB4zYMUB3wPFzcUJZ">
+    <div class="pill" data-page-node-id="aOkKPTdXBJD7g7jrF4BaEt">● 前后端环境均已验证通过</div>
+    <h1 data-page-node-id="eL5LjMjlLDjHPEK5X0EB53">JavaWeb 全栈开发环境 · 配置总览</h1>
+    <p data-page-node-id="yN1rO1hNj14FlKwdDrKJTC">后端 Spring Boot 3.3.5 + JDK 17 + Maven 3.9.16；前端 Vue 3.5 + Vite 8 + TypeScript。VS Code 已配好，开箱即用。</p>
+  </header>
+
+  <div class="card" data-page-node-id="f8nroJHbUUwAiA99UXSzcg">
+    <h2 data-page-node-id="NsF5tVoxTHzEnuHaDweW7J">工具链关系</h2>
+
+    <h3 data-page-node-id="gtL9xBo3tjjeYPsZdHYv2m">后端</h3>
+    <div class="flow" data-page-node-id="BvlPT0FdQzvFnNL9D6tvyk">
+      <div class="node" data-page-node-id="ehWe8j3aShje1n1bhgI2QX"><b data-page-node-id="SCzJF0VUjGlS9x8m4CQ75Q">JDK 17</b><small data-page-node-id="LZ5jDJ1na6p4CQy6FyHDjl">C:\dev\jdk-17<br data-page-node-id="gF7pKWTKxn03QCbFJm3Ygu">Temurin 17.0.20.1</small></div>
+      <div class="arrow" data-page-node-id="JouqrCpK5M2T70AjxwAu89">→</div>
+      <div class="node" data-page-node-id="l6P3CRV6YpGeUAxF2gDNA3"><b data-page-node-id="P08Abdayx1jP90YHUEQ0l5">Maven 3.9.16</b><small data-page-node-id="fgedW9i0f00OlWudkWaCc0">C:\dev\maven<br data-page-node-id="pKExvfyyreVn52TkFfD3IE">依赖走阿里云镜像</small></div>
+      <div class="arrow" data-page-node-id="Ia5XEFgu0kRV4GU78IdOBX">→</div>
+      <div class="node" data-page-node-id="AayJkhSQpyAuaWsVwUO8tC"><b data-page-node-id="5VtgEhmpffwHYjy3AOEYGT">Spring Boot</b><small data-page-node-id="X2gzPznGg9JkUKYfo2ZsGc">内嵌 Tomcat 10<br data-page-node-id="B09aemGLIlHNKWUZtCV6Df">无需单独装服务器</small></div>
+      <div class="arrow" data-page-node-id="NRf7DTe9prfHU7jPemVfs5">→</div>
+      <div class="node" data-page-node-id="l3BzBIk6aRRgDHa1YVLC66"><b data-page-node-id="u3DdZ0uTKjCd0mJLWXcVxC">端口 8080</b><small data-page-node-id="04UWMZr4VhlRL6FWywgBMr">提供 /api/*<br data-page-node-id="AQjEBAe5otgyjZclY1RXMt">JSON 接口</small></div>
+    </div>
+
+    <h3 data-page-node-id="UZFI9mSqdMDhTGFyHAx2HI">前端</h3>
+    <div class="flow" data-page-node-id="j95Fy0Si2PDrCRBO8yUZH8">
+      <div class="node fe" data-page-node-id="LFkgqEZAQDpZSshzPC5PeD"><b data-page-node-id="CPZLT8hJmKWeMfD7xYOUMJ">Node.js 24</b><small data-page-node-id="34KfXszVVnCTyq6t44UGU8">C:\nodejs<br data-page-node-id="H1y4DCzZr66FWkFuTVSy7t">v24.14.0</small></div>
+      <div class="arrow" data-page-node-id="uFbOwtlCurPqrC822vNNSs">→</div>
+      <div class="node fe" data-page-node-id="3ybLxwzzlaNk3c14o30my5"><b data-page-node-id="zuIOiUTofEzEBadgY1Aml6">npm / pnpm</b><small data-page-node-id="iANWoRO1GUTg1gmaggnWQ0">依赖走淘宝镜像<br data-page-node-id="BL27a7YwLfBXBeV13P2MGr">npm 11.9.0 · pnpm 12.3.4</small></div>
+      <div class="arrow" data-page-node-id="Hd9AfQRqhosT3DrclHyCQ4">→</div>
+      <div class="node fe" data-page-node-id="zOpHHJih9f8ebqbLKEiqRO"><b data-page-node-id="0W4keKixUwdyapFNIeYCbg">Vite 8</b><small data-page-node-id="k3fd2iIk0Oc8DvhuuT5Fkx">dev server 5173<br data-page-node-id="Q77APAVPycgZl7BCiyMXdo">HMR 热更新</small></div>
+      <div class="arrow" data-page-node-id="yOWlghpoTdHWQRHmeBB6XA">→</div>
+      <div class="node fe" data-page-node-id="FZimmGfBUhkqAJXnoRefqy"><b data-page-node-id="5xREZegBlGTZuLmvHAKDru">Vue 3.5 + TS</b><small data-page-node-id="HyReFvx9iFlivXscCSNYn9">Router + Pinia<br data-page-node-id="vQwYLL1cxRl2g2I4xk1DWi">ESLint + Prettier</small></div>
+    </div>
+
+    <h3 data-page-node-id="FSRiocPfSIInfXS5xClt4k">联调链路</h3>
+    <pre data-page-node-id="6fgpWgnRP22IRxIAc8zAps">浏览器 → http://localhost:5173  （Vue 前端）
+              │
+              │  请求 /api/hello
+              ▼
+        Vite 代理（vite.config.ts 里的 proxy 配置）
+              │
+              ▼
+        http://localhost:8080  （Spring Boot 后端）→ 返回 JSON</pre>
+  </div>
+
+  <div class="card" data-page-node-id="UnIqMB2mXcra0XDNpCd1Ck">
+    <h2 data-page-node-id="b447hVQQhEElwGZPVWn4Ba">安装清单 <span data-page-node-id="3M51ZXkr0QHX2CT7xVsvDm">后端组件在 C:\dev，前端运行时在 C:\nodejs</span></h2>
+    <table data-page-node-id="qouKx7dIxcJtcSORrllOKd">
+      <thead data-page-node-id="egvWIJqlK0GnEHDshaZFSW">
+        <tr data-page-node-id="HO1dx4ocD3L3n9DKVKQGBk"><th data-page-node-id="BABD8Kf7SucL2BJTO7JGuT">组件</th><th data-page-node-id="iYNW7Vxc1bUlhOVjVX9thf">版本</th><th data-page-node-id="IwRszRH90GvAU0BiCagQSl">位置</th><th data-page-node-id="WtJ1tOByFBB9NaoQFrYSkd">说明</th></tr>
+      </thead>
+      <tbody data-page-node-id="QSd2ho9ljohQO6qtDv6vZm">
+        <tr data-page-node-id="stbLbJ2sF7jSpXFvpZ8YfG"><td data-page-node-id="hwLGrwimD1ELt9M4AsypQS"><b data-page-node-id="CgIh7htjCqDcKwQEwbAvnW">Eclipse Temurin JDK</b></td><td class="mono" data-page-node-id="ffw8mj0Mz1YZzJGd0TlQcB">17.0.20.1</td><td class="mono path" data-page-node-id="uQUrn6B29aIPfRgpARJxFS">C:\dev\jdk-17</td><td data-page-node-id="5MfqDHDgsaAcstPa5PvAyN">Java 编译运行</td></tr>
+        <tr data-page-node-id="GvHWc2chrQ8GZiYUdA1m9Q"><td data-page-node-id="gwuv7uBdvT3YxO4Mhk3zDP"><b data-page-node-id="fmOGnsQgA08s3cto0xliwl">Apache Maven</b></td><td class="mono" data-page-node-id="q5KAmqyiyxUaEBLKrLRPMD">3.9.16</td><td class="mono path" data-page-node-id="u4i3OJW1DTax5oKwvtk2fC">C:\dev\maven</td><td data-page-node-id="ElaTlOSL2t5sAXTf9qGpWA">后端依赖与打包</td></tr>
+        <tr data-page-node-id="aLfud7KBS0y6IsBJXUKuN2"><td data-page-node-id="JQWqZqPdLh2BlzKsF6LdtZ"><b data-page-node-id="UJZ2jPQKHOAw2dzrrFYEEX">Node.js</b></td><td class="mono" data-page-node-id="joDwcaBwPDDwFUFv6GB0ub">24.14.0</td><td class="mono path" data-page-node-id="DQ9EpdaB2CDOVeMiK1mtDc">C:\nodejs</td><td data-page-node-id="9jqAY3tZlfK7bKxiVE5kLw">原本已装，未改动</td></tr>
+        <tr data-page-node-id="XUfP4IYEOyYvWuOJA0qlHm"><td data-page-node-id="tazxIwGKA9B9fvluXsRXy9"><b data-page-node-id="LVcHuJ99UHQ6AHWCZ9QVhp">npm</b></td><td class="mono" data-page-node-id="wYOrMLW5DVLNK6HrqpxuJd">11.9.0</td><td class="mono path" data-page-node-id="i9TI2BGrVUctHFOTOwyRQF">C:\nodejs</td><td data-page-node-id="jyzryu3wntfuh9aFaKGqd2">Node 自带</td></tr>
+        <tr data-page-node-id="xMJWCxLQFsbSyFGsRRUDgg"><td data-page-node-id="F2yTwXnddhbvPkdzJdAHDH"><b data-page-node-id="OaetjoNpWYwiUBbG1vPa3p">pnpm</b></td><td class="mono" data-page-node-id="mTREzovaV8ykQMs7B5boV7">12.3.4</td><td class="mono path" data-page-node-id="5MJZkbdSLUM5HXvNVBvbD8">%APPDATA%\npm</td><td data-page-node-id="IZlusHkAXDFCgZ0qrw7kfw">本次新装</td></tr>
+        <tr data-page-node-id="RmRr60LdKB5QMoAnGr5yf0"><td data-page-node-id="fbGiGK0HBTy5Gt3f2hFv1h"><b data-page-node-id="yHMhsIhCaQXYqIvLPb5Guk">TypeScript</b></td><td class="mono" data-page-node-id="OuqmP2QPYFDKGme2anze0t">7.0.2</td><td class="mono path" data-page-node-id="sMG5ZvsyvbKBsAmtHCBQOh">%APPDATA%\npm</td><td data-page-node-id="RDT7iCRC1725LGNw2GRaLo">全局 tsc 命令</td></tr>
+        <tr data-page-node-id="1g5qjaJrG69xjeTiwEDeGe"><td data-page-node-id="aQgtjON1mxAwvyDRVzxvf1"><b data-page-node-id="vXULFRTJoviHrYkaWjParg">npm 用户配置</b></td><td class="mono" data-page-node-id="TYkEQTxxiGHUdwwlMP0EXh">—</td><td class="mono path" data-page-node-id="eHDedLjbdDWavSwFliHg07">C:\Users\asus\.npmrc</td><td data-page-node-id="xEWXxkJqSgMi6p2690vFYq">淘宝 npmmirror 镜像</td></tr>
+        <tr data-page-node-id="IsbZ5tplZz6FNuTwU4NIsv"><td data-page-node-id="tf8m34hrsBek4Z6iHbO9IX"><b data-page-node-id="aJSv1ephQIyG9mdlvyMZfr">Maven 用户配置</b></td><td class="mono" data-page-node-id="UUiEjnezAYRDPj76XcLduV">—</td><td class="mono path" data-page-node-id="KnMz6WCtZ9La335SkbUUu4">C:\Users\asus\.m2\settings.xml</td><td data-page-node-id="H3ws3RHnDDkc9iQDGQs1UQ">阿里云镜像 + UTF-8</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" data-page-node-id="89LCxHw3ulwqWdgKAjhwkN">
+    <h2 data-page-node-id="QnAs2rNjTfNExzJUEyjGiU">环境变量 <span data-page-node-id="nabTBkuYigDhqVoIpwvetx">已永久写入用户级配置，新开终端即生效</span></h2>
+    <dl class="kv" data-page-node-id="lTTR3io6x4dKV7l9gwqmgx">
+      <dt data-page-node-id="qrdwB1Qgmx3evlsKWpaHUZ">JAVA_HOME</dt><dd data-page-node-id="26usychstWVePLo4gKBGnz">C:\dev\jdk-17</dd>
+      <dt data-page-node-id="gRE0utkPdCerqUiRr5YRw7">MAVEN_HOME</dt><dd data-page-node-id="mHlZr7Qio0KcH7YtgNscqr">C:\dev\maven</dd>
+      <dt data-page-node-id="FmXEVyliRyzUNIHAoUTHtN">M2_HOME</dt><dd data-page-node-id="QKTrubr7BJZKvyvmihJtzf">C:\dev\maven</dd>
+      <dt data-page-node-id="W2MKIKfSk23nwJLUPQ5PI9">PATH（前置）</dt><dd data-page-node-id="Ret57N3CZrdQ0vWmoPIuOR">C:\dev\jdk-17\bin;C:\dev\maven\bin;…;%APPDATA%\npm</dd>
+    </dl>
+    <pre data-page-node-id="UNi1OEFvyS94TqOFR91mFC">原值备份：C:\dev\_backup\env-backup-*.txt
+
+前端全局工具目录 %APPDATA%\npm 本来就在 PATH 里，pnpm / tsc 装完即可直接用。</pre>
+  </div>
+
+  <div class="card" data-page-node-id="AjxdvKMkRNJMTCyZxU4xg6">
+    <h2 data-page-node-id="8YIrZdb5ffiVc1occ6bO7X">VS Code 扩展 <span data-page-node-id="AZo4WJBGCzXitpSIM6VfKx">本次新增 12 个</span></h2>
+    <h3 data-page-node-id="zr3SpLm1EoCObgTPUcKEVO">后端</h3>
+    <table data-page-node-id="aa7E0KV42MMWiYKpuSDHEx">
+      <tbody data-page-node-id="fjGB2IDHItvk6hTuP5WPo6">
+        <tr data-page-node-id="Qsu36qhR5AWe2RHb7bHgZE"><td class="mono" data-page-node-id="4ow7TswmIbwHqa3RAzRXsk">vscjava.vscode-java-pack</td><td data-page-node-id="woCC16pMoP4buxYTZxFScX">Java 扩展包（语言支持 / 调试 / 测试 / Maven / 项目视图）</td></tr>
+        <tr data-page-node-id="hqpCFEgnNlFXmpdaGWbF4E"><td class="mono" data-page-node-id="Gv4QbaJuVBSXg9whyPvBcR">vmware.vscode-boot-dev-pack</td><td data-page-node-id="g7SejFU6Vp7Q9i2d3rY5FS">Spring Boot 扩展包（代码提示 / Dashboard / Initializr）</td></tr>
+        <tr data-page-node-id="1QUmZO2h4XtBxjIEZDWeSK"><td class="mono" data-page-node-id="pCE78jiGmTq1IlbOtllrEd">vscjava.vscode-lombok</td><td data-page-node-id="M6CWeyUyjPv7QBWB87wd1f">Lombok 注解支持（@Data / @Slf4j）</td></tr>
+        <tr data-page-node-id="eqXUZwPxqf3k0gGK0ja5Bp"><td class="mono" data-page-node-id="1yhjx0UtFAUMmrDnhsewhu">redhat.vscode-xml</td><td data-page-node-id="1lgLh4fMOvdUampHkh91ix">pom.xml 等 XML 校验与提示</td></tr>
+      </tbody>
+    </table>
+    <h3 data-page-node-id="5E0PiM6E7UMs9wc2TnLFAP">前端</h3>
+    <table data-page-node-id="aDnzh6utYbyAqkQ5UkUQga">
+      <tbody data-page-node-id="XT5Z8gxGDcqwniGNaEgRwQ">
+        <tr data-page-node-id="vsH7s8XYxoy7aURXcwA9ZZ"><td class="mono" data-page-node-id="I0gCWIPqVZVHEfIU8owZsD">vue.volar</td><td data-page-node-id="Xgm80vTVY5Y0d1B9WeGolu">Vue 3 官方语言支持（你原本就装了）</td></tr>
+        <tr data-page-node-id="T4TNSxFAmUz3AG6EGFTTEX"><td class="mono" data-page-node-id="JTvIw1P2Rb0mAu2IBD49IO">dbaeumer.vscode-eslint</td><td data-page-node-id="hdrw68wtKfgRGNd0N9xJ5q">ESLint 实时检查</td></tr>
+        <tr data-page-node-id="JQUzwAQKmRdtQgI1R8XnCS"><td class="mono" data-page-node-id="3QVKebFGC3L3rIUCDnXIlr">esbenp.prettier-vscode</td><td data-page-node-id="ssksx9QwWQdWi90qiLScX5">代码格式化，已设为 js / ts / vue / json / css 的默认格式化器</td></tr>
+        <tr data-page-node-id="lCmLhpOagd4HCkSLMP3ruo"><td class="mono" data-page-node-id="0eLKMuTNpcHyllOPDPb3wa">christian-kohler.npm-intellisense</td><td data-page-node-id="Hue46JsroQ05ywkZZEjMwB">import 时自动补全 npm 包名</td></tr>
+        <tr data-page-node-id="FJ5NJ0YF82rXqkH70IEXzG"><td class="mono" data-page-node-id="d8U56XpAc4BmnSXqWfesA2">christian-kohler.path-intellisense</td><td data-page-node-id="iAlTAgK82UpLvsQTKTww4e">文件路径自动补全</td></tr>
+        <tr data-page-node-id="GrcGmcaJUdx5LFG3xuAwME"><td class="mono" data-page-node-id="8QeYrP4H1REKeYFoQiCwzg">xabikos.javascriptsnippets</td><td data-page-node-id="rbhkX57VpO7UsX6ArCkeGb">常用 JS 代码片段</td></tr>
+        <tr data-page-node-id="WM3hP26VFuwKFdyY2RBA6s"><td class="mono" data-page-node-id="j9pqC1YGq5wDYCQeT4sIPQ">formulahendry.auto-rename-tag</td><td data-page-node-id="LcDCH2PblNrtn69cflDaUJ">改 HTML / Vue 标签时自动配对改闭合标签</td></tr>
+        <tr data-page-node-id="3YqPVR6Wc1khr85cntYF9k"><td class="mono" data-page-node-id="oKrsBz6o6vkO1dg1MRJM5m">ritwickdey.liveserver</td><td data-page-node-id="WMC10l8HQTvFY5v6D5f4Du">静态 HTML 一键起本地服务，写原生网页时用</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" data-page-node-id="Pe938p894ihSvDgBL4r5Px">
+    <h2 data-page-node-id="h6L80nsbwNWukblQQNVZEV">日常使用 <span data-page-node-id="sHAe87PkSu0NUHykKpRjbx">工作区：C:\Users\asus\OneDrive\Desktop\javaweb</span></h2>
+
+    <h3 data-page-node-id="pXl7AAOynCqDeijdYK5dAb">启动后端</h3>
+    <ol class="steps" data-page-node-id="bK98LSGEP8CqcbMj5TmFha">
+      <li data-page-node-id="FgNLKXvibNrg8hZsdonWxM"><b data-page-node-id="dMNjgzxTDovJhk22aKMsi9">按 F5</b><small data-page-node-id="TkeXGxC0gmzKelWxoo2V8V">选「启动 JavawebApplication」；或在项目根目录跑 <code data-page-node-id="5oXCyhtH8pPnIbIXDancng">mvn spring-boot:run</code></small></li>
+      <li data-page-node-id="3NS4bN2JI08E5Xw6h8Oq2n"><b data-page-node-id="t9vhaaCYcfptNZLFBlIBjS">验证</b><small data-page-node-id="s66lKg3HM50iOuvPmP18P9">浏览器打开 <code data-page-node-id="85xXbAtpQCFfloX8qT7ITs">http://localhost:8080</code>，首页列出所有接口</small></li>
+    </ol>
+
+    <h3 data-page-node-id="iyMrtJhyeHTBB1WqpMXvz2">启动前端</h3>
+    <ol class="steps fe-step" data-page-node-id="YdaYCx09GDBQA0X3W8yP4G">
+      <li data-page-node-id="kybUgvjC00iDclzH3loX2K"><b data-page-node-id="7LrG2tYHExWqWXuLTiPRc3">进入 frontend 目录</b><small data-page-node-id="lSwwLBNBvY18ShDH9Esa7e">终端执行 <code data-page-node-id="z7cXkqyYnl6AoP00ixsyd9">cd frontend</code></small></li>
+      <li data-page-node-id="LCjByTezF5szixmyiqk99A"><b data-page-node-id="xje9tVVFZ5pv4gJC7xe3eF">跑起来</b><small data-page-node-id="D4e3lNGG7iM7ULQkf0tS8Y"><code data-page-node-id="cCjxy2NBMUFyj7GOi59ZFN">npm run dev</code>，浏览器访问 <code data-page-node-id="Z2JlyQoodA5em4BpcijhqJ">http://localhost:5173</code></small></li>
+      <li data-page-node-id="mZVRbkI9Kd0qfDOXCTD1sm"><b data-page-node-id="Gln81qo7Hdswc3bisdfsvE">打开联调自检页</b><small data-page-node-id="5np0uQMz5oaIAbxYvM9mGh">点导航里的「联调自检」，或直接访问 <code data-page-node-id="Ik1spBrHIfz60KLvElehle">http://localhost:5173/backend</code>，页面上两个按钮会真实调用后端接口</small></li>
+    </ol>
+
+    <h3 data-page-node-id="xRvwDz8trKl9rnfsUdZJn9">常用命令（在 frontend 目录下）</h3>
+    <pre data-page-node-id="5K5HqVDFDWQIhlFw6SG7D5">npm run dev          启动开发服务器（热更新，改代码即时生效）
+npm run build        类型检查 + 打包到 dist/
+npm run preview      本地预览打包结果
+npm run lint         代码检查并自动修复
+npm run format       用 Prettier 格式化 src/</pre>
+  </div>
+
+  <div class="card" data-page-node-id="UkRdrxmTt4P5u6EbXVpDnV">
+    <h2 data-page-node-id="gYKYm39bA1ITogrelcNFPE">验证结果 <span data-page-node-id="vMCbPMP31Dfssm9fShK8Gb">本次实测，不是推断</span></h2>
+
+    <h3 data-page-node-id="YjrhcA8SglqGyNP9mrb2FE">后端</h3>
+    <pre data-page-node-id="mjAZPfjQVUxDwlCxATXkfC">mvn clean package        →  BUILD SUCCESS，2 个单元测试通过，产出 21MB 可执行 jar
+GET /api/hello           →  200  Hello, JavaWeb! 后端环境已就绪。
+GET /api/hello/皮宸西     →  200  中文路径参数正常
+GET /api/echo?msg=环境OK  →  200  中文查询参数无乱码
+GET /api/env             →  200  javaVersion=17.0.20.1, javaHome=C:\dev\jdk-17</pre>
+
+    <h3 data-page-node-id="eV64ztNbkeUfd4152JyLTS">前端</h3>
+    <pre data-page-node-id="BHeu95zhENbBuDAurGoJkc">npm install（300 个包）                →  成功，node_modules/.bin 正常生成
+npm run build（vue-tsc + vite build）  →  成功，48 个模块，dist/ 约 114KB
+npm run dev                           →  5173 端口启动成功
+GET http://localhost:5173/            →  200  SPA 页面正常
+GET http://localhost:5173/api/hello   →  200  代理转发到 8080，返回 JSON
+GET http://localhost:5173/api/env     →  200  javaVersion=17.0.20.1
+GET http://localhost:5173/backend     →  200  SPA 路由（history 回退）正常</pre>
+    <p style="margin:14px 0 0;color:var(--sub);font-size:13px;" data-page-node-id="MQzUlzuzq4NvMDFOILrI3C">
+      最后三条是关键：说明「Vue 前端 → Vite 代理 → Spring Boot 后端」整条链路是通的。前端代码里不用写后端域名，也不会有跨域问题。
+    </p>
+  </div>
+
+  <div class="card" data-page-node-id="VlcR7bsxbB67cy6v5a1Xm2">
+    <h2 data-page-node-id="Zfz9tcDpWEmVMAE56LDA5N">需要你知道的几件事</h2>
+
+    <div class="note" data-page-node-id="kWsQtHRPPxbJuOnF7jq3KE">
+      <b data-page-node-id="1156FtJC0AORDu2aDv5ONM">1. pnpm 有个坑，本工程最终改用 npm 安装。</b>
+      pnpm 默认的 isolated 隔离布局要给每个依赖建 Windows 目录联接，在某些受限环境下这一步会<b data-page-node-id="DCtGWUYIC1OnekRl9g3ego">静默失败</b>——
+      pnpm 报告安装成功，但 <span class="mono" data-page-node-id="rWqGBdlFaVjk4VcxsCyKpz">node_modules/&lt;包名&gt;</span> 是空目录、<span class="mono" data-page-node-id="FOFmLxByk4Oilh172Edev9">node_modules/.bin</span> 根本不生成，
+      于是 <code data-page-node-id="Z3yO0om2GIGoWz9P1qdGCe">npm run dev</code> 报 "run-p 不是内部或外部命令"。我实测复现过，才改成 npm 安装（对应 <span class="mono" data-page-node-id="WiZuEJSOFppjVH4YG3Gpqp">package-lock.json</span>）。
+      切回 pnpm 的方法和修复开关都写在 <span class="mono" data-page-node-id="j9IBscl2MuUSkldLe2pSyK">frontend/.npmrc</span> 的注释里。
+    </div>
+
+    <div class="note" data-page-node-id="QDJOFlaE0iH1cwbQoB50nc">
+      <b data-page-node-id="AAwlL3zVWRcvnuBy3DkiN9">2. create-vue 脚手架有个版本不一致，我顺手对齐了。</b>
+      它生成的 <span class="mono" data-page-node-id="lS9fR2RcytIduvDgsJ8SmJ">package.json</span> 里 <span class="mono" data-page-node-id="pwLMhf3DISb8AfllplOdxC">eslint-plugin-oxlint@~1.73.0</span> 要求 peer
+      <span class="mono" data-page-node-id="yAFNwS8UmicvIdO3xELRhq">oxlint@~1.73.0</span>，但同一份文件又把 oxlint 写成 <span class="mono" data-page-node-id="NnaCe3WglcIeGcO7wAqfmT">~1.74.0</span>。
+      pnpm 只当警告，npm 直接报 ERESOLVE 装不上。统一到 <span class="mono" data-page-node-id="c6eo8vNkeFLPcaSuQ7yT3P">~1.75.0</span> 后正常。
+    </div>
+
+    <div class="note" data-page-node-id="9uhnWUgXe0CXP4vxPdHQYR">
+      <b data-page-node-id="LXQHafYN1wRdx1OeTUA9M8">3. 有几个依赖声明要 Node ≥ 24.15.0，你的是 24.14.0。</b>
+      npm 安装时打了几条 <span class="mono" data-page-node-id="gh5gP6wXtYAFnPcEzOX62c">EBADENGINE</span> 警告，不影响使用（实测构建、启动、代理全通）。
+      真遇到奇怪问题，把 Node 升到最新 LTS 即可。
+    </div>
+
+    <div class="note" data-page-node-id="LoPEf43GADmS15CzBfIr6P">
+      <b data-page-node-id="OlgvbceLr54w1IhtyW4q4s">4. 你机器上原有的 GraalVM 21 没删。</b>
+      它在系统级 <span class="mono" data-page-node-id="TIr3LnCNGtUrTaWpRLlWsR">JAVA_HOME</span> 里（<span class="mono" data-page-node-id="uFSSdhfYBdOnQROEBO76FB">C:\JavaSE\graalvm-jdk</span>），现已被用户级的 JDK 17 覆盖。
+      另外那个 JDK 的 <span class="mono" data-page-node-id="1PPqWHlnLX6YDruvSVV6PR">bin</span> 目录里混着一堆练习用的 <span class="mono" data-page-node-id="VXgH44Sj967xRikHO3MbRI">.java / .class</span>，
+      建议源码单独开个文件夹，用 <code data-page-node-id="tHsLCu9JBlOoBXtRMh1zPt">javac -d out</code> 指定输出目录。
+    </div>
+
+    <div class="note" data-page-node-id="OGtartoj47O8AKEy85kDj9">
+      <b data-page-node-id="SlXXDG363UKRwW10fL2wsN">5. 有一个文件夹需要你手动删一下。</b>
+      <span class="mono" data-page-node-id="Zim7pmz4xTTvRFzCR0pcip">C:\dev\_setup-temp</span> 是我这次调试的残留（含 pnpm 失败安装的副本，约 <b data-page-node-id="uPPH9aH9K4T2BtMsHKGRr3">746MB</b>）。
+      我这边有安全删除保护，删不掉，你在资源管理器里删掉整个 <span class="mono" data-page-node-id="CeqBsD11ip1jggApjT9DUN">_setup-temp</span> 文件夹即可。
+      <span class="mono" data-page-node-id="UWx1fj6RiELDnmEvlhByKF">C:\dev\_downloads</span> 里的 JDK / Maven 压缩包（约 200MB）也可以一并删。
+    </div>
+  </div>
+
+  <footer data-page-node-id="O5lpmwSFGTAFdG6VqYNhPv">生成于 2026-09-10 · 工作区 C:\Users\asus\OneDrive\Desktop\javaweb</footer>
+
+</div>
+</body>
+</html>

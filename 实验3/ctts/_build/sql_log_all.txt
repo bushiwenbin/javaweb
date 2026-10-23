@@ -1,0 +1,184 @@
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT(*) AS total FROM sys_user WHERE deleted = 0
+==> Parameters: 
+<==        Row: 7
+<==      Total: 1
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE deleted=0 ORDER BY id DESC LIMIT ?
+==> Parameters: 3(Long)
+<==        Row: 7, 2024003, 李娜, STUDENT, 2024003@qq.com, 13900000007, 0, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 6, 2024002, 张伟, STUDENT, 2024002@qq.com, 13900000006, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 5, 2024001, 皮宸西, STUDENT, 2400770225@qq.com, 13900000005, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==      Total: 3
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT(*) AS total FROM sys_user WHERE deleted = 0 AND (role = ? AND (username LIKE ? OR real_name LIKE ?))
+==> Parameters: STUDENT(String), %2024%(String), %2024%(String)
+<==        Row: 3
+<==      Total: 1
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE deleted=0 AND (role = ? AND (username LIKE ? OR real_name LIKE ?)) ORDER BY id DESC LIMIT ?
+==> Parameters: STUDENT(String), %2024%(String), %2024%(String), 3(Long)
+<==        Row: 7, 2024003, 李娜, STUDENT, 2024003@qq.com, 13900000007, 0, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 6, 2024002, 张伟, STUDENT, 2024002@qq.com, 13900000006, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 5, 2024001, 皮宸西, STUDENT, 2400770225@qq.com, 13900000005, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==      Total: 3
+Creating a new SqlSession
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE id=? AND deleted=0
+==> Parameters: 5(Long)
+<==        Row: 5, 2024001, 皮宸西, STUDENT, 2400770225@qq.com, 13900000005, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE id=? AND deleted=0
+==> Parameters: 999(Long)
+<==      Total: 0
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT( * ) AS total FROM sys_user WHERE deleted=0 AND (username = ?)
+==> Parameters: 2024008(String)
+<==        Row: 0
+<==      Total: 1
+==>  Preparing: INSERT INTO sys_user ( username, password, real_name, role, email, phone, status, deleted, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 2024008(String), e10adc3949ba59abbe56e057f20f883e(String), 赵敏(String), STUDENT(String), 2024008@qq.com(String), 13900000008(String), 1(Integer), 0(Integer), 2026-10-22T19:31:28.695403(LocalDateTime), 2026-10-22T19:31:28.695403(LocalDateTime)
+<==    Updates: 1
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT( * ) AS total FROM sys_user WHERE deleted=0 AND (username = ?)
+==> Parameters: admin(String)
+<==        Row: 1
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE id=? AND deleted=0
+==> Parameters: 8(Long)
+<==        Row: 8, 2024008, 赵敏, STUDENT, 2024008@qq.com, 13900000008, 1, 0, 2026-10-22 19:31:29, 2026-10-22 19:31:29
+<==      Total: 1
+==>  Preparing: UPDATE sys_user SET username=?, real_name=?, role=?, email=?, phone=?, status=?, update_time=? WHERE id=? AND deleted=0
+==> Parameters: 2024008(String), 赵敏(String), TEACHER(String), zhaomin@ctts.edu.cn(String), 13900000009(String), 1(Integer), 2026-10-22T19:31:29.631863600(LocalDateTime), 8(Long)
+<==    Updates: 1
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE id=? AND deleted=0
+==> Parameters: 8(Long)
+<==        Row: 8, 2024008, 赵敏, TEACHER, zhaomin@ctts.edu.cn, 13900000009, 1, 0, 2026-10-22 19:31:29, 2026-10-22 19:31:30
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: UPDATE sys_user SET status = ?, update_time = NOW() WHERE id = ? AND deleted = 0
+==> Parameters: 0(Integer), 8(Long)
+<==    Updates: 1
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE id=? AND deleted=0
+==> Parameters: 8(Long)
+<==        Row: 8, 2024008, 赵敏, TEACHER, zhaomin@ctts.edu.cn, 13900000009, 0, 0, 2026-10-22 19:31:29, 2026-10-22 19:31:29
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id, username, real_name, role, email, phone, status, deleted, create_time, update_time FROM sys_user WHERE role = ? AND deleted = 0 ORDER BY id
+==> Parameters: TEACHER(String)
+<==        Row: 2, dingxr, 丁玺润, TEACHER, dingxr@ctts.edu.cn, 13900000002, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 3, limin, 李敏, TEACHER, limin@ctts.edu.cn, 13900000003, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 4, wangqiang, 王强, TEACHER, wangq@ctts.edu.cn, 13900000004, 1, 0, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 8, 2024008, 赵敏, TEACHER, zhaomin@ctts.edu.cn, 13900000009, 0, 0, 2026-10-22 19:31:29, 2026-10-22 19:31:29
+<==      Total: 4
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT(*) FROM sys_user WHERE role = ? AND deleted = 0
+==> Parameters: ADMIN(String)
+<==        Row: 1
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT(*) FROM sys_user WHERE role = ? AND deleted = 0
+==> Parameters: TEACHER(String)
+<==        Row: 4
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT(*) FROM sys_user WHERE role = ? AND deleted = 0
+==> Parameters: STUDENT(String)
+<==        Row: 3
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE id=? AND deleted=0
+==> Parameters: 8(Long)
+<==        Row: 8, 2024008, 赵敏, TEACHER, zhaomin@ctts.edu.cn, 13900000009, 0, 0, 2026-10-22 19:31:29, 2026-10-22 19:31:29
+<==      Total: 1
+==>  Preparing: UPDATE sys_user SET update_time=?, deleted=1 WHERE id=? AND deleted=0
+==> Parameters: 2026-10-22T19:31:30.845520400(LocalDateTime), 8(Long)
+<==    Updates: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id,username,real_name,role,email,phone,status,deleted,create_time,update_time FROM sys_user WHERE id=? AND deleted=0
+==> Parameters: 8(Long)
+<==      Total: 0
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT(*) AS total FROM training_project
+==> Parameters: 
+<==        Row: 8
+<==      Total: 1
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project ORDER BY status ASC,deadline ASC LIMIT ?
+==> Parameters: 3(Long)
+<==        Row: 3, 实训成果统计报表, 数据分析, 李敏, 2026-11-30, 0, 按班级、项目维度统计实训提交率与平均得分。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 5, 任务提交记录导出, 工具开发, 王强, 2026-12-20, 0, 支持将学生提交记录导出为 Excel 文件。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 7, 接口自动化测试用例, 测试, 王强, 2026-12-25, 0, 为 Controller 层接口编写 JUnit 5 + MockMvc 自动化测试。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==      Total: 3
+Creating a new SqlSession
+==>  Preparing: SELECT COUNT(*) AS total FROM training_project WHERE (status = ? AND category = ?)
+==> Parameters: 1(Integer), Web 后端(String)
+<==        Row: 3
+<==      Total: 1
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE (status = ? AND category = ?) ORDER BY status ASC,deadline ASC LIMIT ?
+==> Parameters: 1(Integer), Web 后端(String), 5(Long)
+<==        Row: 2, 学生信息管理模块, Web 后端, 丁玺润, 2026-11-15, 1, 实现学生信息的增删改查接口，并完成参数校验。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 4, 前后端分离接口联调, Web 后端, 丁玺润, 2026-12-10, 1, 使用 Apifox 对全部 REST 接口进行调试与文档生成。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 1, 校园实训任务管理系统（CTTS）后端, Web 后端, 丁玺润, 2026-12-31, 1, 基于 Spring Boot 3 构建实训任务发布、提交与评分接口。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==      Total: 3
+Creating a new SqlSession
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE id=?
+==> Parameters: 3(Long)
+<==        Row: 3, 实训成果统计报表, 数据分析, 李敏, 2026-11-30, 0, 按班级、项目维度统计实训提交率与平均得分。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE id=?
+==> Parameters: 999(Long)
+<==      Total: 0
+Creating a new SqlSession
+==>  Preparing: INSERT INTO training_project ( project_name, category, teacher, deadline, status, description, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+==> Parameters: 实训成果答辩系统(String), Web 后端(String), 丁玺润(String), 2027-01-08(LocalDate), 1(Integer), 支持答辩分组、评分与结果公示。(String), 2026-10-22T19:31:32.703318500(LocalDateTime), 2026-10-22T19:31:32.703318500(LocalDateTime)
+<==    Updates: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE id=?
+==> Parameters: 9(Long)
+<==        Row: 9, 实训成果答辩系统, Web 后端, 丁玺润, 2027-01-08, 1, 支持答辩分组、评分与结果公示。, 2026-10-22 19:31:33, 2026-10-22 19:31:33
+<==      Total: 1
+==>  Preparing: UPDATE training_project SET project_name=?, category=?, teacher=?, deadline=?, status=?, description=?, update_time=? WHERE id=?
+==> Parameters: 实训成果答辩系统（V2）(String), Web 后端(String), 李敏(String), 2027-02-28(LocalDate), 2(Integer), 增加结果公示与成绩导出功能。(String), 2026-10-22T19:31:33.601407300(LocalDateTime), 9(Long)
+<==    Updates: 1
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE id=?
+==> Parameters: 9(Long)
+<==        Row: 9, 实训成果答辩系统（V2）, Web 后端, 李敏, 2027-02-28, 2, 增加结果公示与成绩导出功能。, 2026-10-22 19:31:33, 2026-10-22 19:31:34
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: UPDATE training_project SET status = ?, update_time = NOW() WHERE id = ?
+==> Parameters: 2(Integer), 3(Long)
+<==    Updates: 1
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE id=?
+==> Parameters: 3(Long)
+<==        Row: 3, 实训成果统计报表, 数据分析, 李敏, 2026-11-30, 2, 按班级、项目维度统计实训提交率与平均得分。, 2026-10-22 19:30:26, 2026-10-22 19:31:33
+<==      Total: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id, project_name, category, teacher, deadline, status, description, create_time, update_time FROM training_project WHERE category = ? ORDER BY deadline
+==> Parameters: Web 后端(String)
+<==        Row: 2, 学生信息管理模块, Web 后端, 丁玺润, 2026-11-15, 1, 实现学生信息的增删改查接口，并完成参数校验。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 6, 登录鉴权与 Token 校验, Web 后端, 李敏, 2026-12-05, 2, 基于拦截器实现 JWT 登录鉴权与接口权限控制。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 4, 前后端分离接口联调, Web 后端, 丁玺润, 2026-12-10, 1, 使用 Apifox 对全部 REST 接口进行调试与文档生成。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 1, 校园实训任务管理系统（CTTS）后端, Web 后端, 丁玺润, 2026-12-31, 1, 基于 Spring Boot 3 构建实训任务发布、提交与评分接口。, 2026-10-22 19:30:26, 2026-10-22 19:30:26
+<==        Row: 9, 实训成果答辩系统（V2）, Web 后端, 李敏, 2027-02-28, 2, 增加结果公示与成绩导出功能。, 2026-10-22 19:31:33, 2026-10-22 19:31:34
+<==      Total: 5
+Creating a new SqlSession
+==>  Preparing: SELECT category, COUNT(*) AS cnt FROM training_project GROUP BY category ORDER BY cnt DESC, category
+==> Parameters: 
+<==        Row: Web 后端, 5
+<==        Row: 工具开发, 1
+<==        Row: 性能优化, 1
+<==        Row: 数据分析, 1
+<==        Row: 测试, 1
+<==      Total: 5
+Creating a new SqlSession
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE id=?
+==> Parameters: 9(Long)
+<==        Row: 9, 实训成果答辩系统（V2）, Web 后端, 李敏, 2027-02-28, 2, 增加结果公示与成绩导出功能。, 2026-10-22 19:31:33, 2026-10-22 19:31:34
+<==      Total: 1
+==>  Preparing: DELETE FROM training_project WHERE id=?
+==> Parameters: 9(Long)
+<==    Updates: 1
+Creating a new SqlSession
+==>  Preparing: SELECT id,project_name AS name,category,teacher,deadline,status,description,create_time,update_time FROM training_project WHERE id=?
+==> Parameters: 9(Long)
+<==      Total: 0

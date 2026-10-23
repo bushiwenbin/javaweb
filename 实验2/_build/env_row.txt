@@ -1,0 +1,1 @@
+硬件环境：PC 计算机（内存 8GB 及以上）。软件环境：Windows 11、JDK 17.0.20.1（Temurin）、Maven 3.9.16、IntelliJ IDEA 2025.3、Spring Boot 3.3.5、MySQL 8.0.29、内嵌 Tomcat 10.1.31；接口调试使用 curl 命令行 HTTP 客户端（与 Apifox、Postman 等 REST 客户端等价）。前置条件：已完成实验一的 CTTS 项目搭建。

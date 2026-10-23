@@ -1,0 +1,25 @@
+package com.gzu.ctts.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+// @RestController @Controller @Service @Repository @Component
+@RestController
+public class HelloController {
+
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello world";
+    }
+
+    @GetMapping("/hello2")
+    public String hello2(){
+        return "hello world2";
+    }
+
+    @PostMapping("/hello")
+    public String helloPost(){
+        return "hello world post";
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "vscjava.vscode-java-pack",
+    "vmware.vscode-boot-dev-pack",
+    "vscjava.vscode-lombok",
+    "redhat.vscode-xml",
+    "ms-ceintl.vscode-language-pack-zh-hans"
+  ]
+}

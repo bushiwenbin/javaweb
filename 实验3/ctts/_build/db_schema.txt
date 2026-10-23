@@ -1,0 +1,37 @@
+==================== 一、表结构 sys_user ====================
+*************************** 1. row ***************************
+       Table: sys_user
+Create Table: CREATE TABLE `sys_user` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户主键 ID',
+  `username` varchar(50) NOT NULL COMMENT '登录账号，唯一',
+  `password` varchar(64) NOT NULL COMMENT '密码摘要（本实验存 32 位 MD5）',
+  `real_name` varchar(50) DEFAULT NULL COMMENT '真实姓名',
+  `role` varchar(20) NOT NULL DEFAULT 'STUDENT' COMMENT '角色：ADMIN-管理员 TEACHER-教师 STUDENT-学生',
+  `email` varchar(100) DEFAULT NULL COMMENT '电子邮箱',
+  `phone` varchar(20) DEFAULT NULL COMMENT '手机号',
+  `status` tinyint NOT NULL DEFAULT '1' COMMENT '状态：1-启用 0-禁用',
+  `deleted` tinyint NOT NULL DEFAULT '0' COMMENT '逻辑删除标记：0-未删除 1-已删除',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_username` (`username`),
+  KEY `idx_role_status` (`role`,`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户表'
+
+==================== 二、表结构 training_project ====================
+*************************** 1. row ***************************
+       Table: training_project
+Create Table: CREATE TABLE `training_project` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '项目主键 ID',
+  `project_name` varchar(100) NOT NULL COMMENT '项目名称',
+  `category` varchar(50) DEFAULT NULL COMMENT '项目类别',
+  `teacher` varchar(50) DEFAULT NULL COMMENT '指导教师',
+  `deadline` date DEFAULT NULL COMMENT '截止日期',
+  `status` tinyint NOT NULL DEFAULT '0' COMMENT '状态：0-未开始 1-进行中 2-已完成',
+  `description` varchar(500) DEFAULT NULL COMMENT '项目描述',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_status_deadline` (`status`,`deadline`),
+  KEY `idx_category` (`category`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='实训项目表'

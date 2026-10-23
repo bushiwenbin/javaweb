@@ -1,0 +1,100 @@
+════════════════════════════════════════════════════════
+【接口1】   查询实训项目列表（模拟数据）
+$ curl -s -i 'http://localhost:8080/api/projects'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:39 GMT
+
+{"code":200,"message":"success","data":[{"id":1,"name":"校园实训任务管理系统（CTTS）后端","category":"Web 后端","teacher":"丁玺润","deadline":"2026-12-31","status":1,"description":"基于 Spring Boot 3 构建实训任务发布、提交与评分接口。"},{"id":2,"name":"学生信息管理模块","category":"Web 后端","teacher":"丁玺润","deadline":"2026-11-15","status":1,"description":"实现学生信息的增删改查接口，并完成参数校验。"},{"id":3,"name":"实训成果统计报表","category":"数据分析","teacher":"李敏","deadline":"2026-11-30","status":0,"description":"按班级、项目维度统计实训提交率与平均得分。"},{"id":4,"name":"前后端分离接口联调","category":"Web 后端","teacher":"丁玺润","deadline":"2026-12-10","status":1,"description":"使用 Apifox 对全部 REST 接口进行调试与文档生成。"},{"id":5,"name":"任务提交记录导出","category":"工具开发","teacher":"王强","deadline":"2026-12-20","status":0,"description":"支持将学生提交记录导出为 Excel 文件。"},{"id":6,"name":"登录鉴权与 Token 校验","category":"Web 后端","teacher":"李敏","deadline":"2026-12-05","status":2,"description":"基于拦截器实现 JWT 登录鉴权与接口权限控制。"},{"id":7,"name":"接口自动化测试用例","category":"测试","teacher":"王强","deadline":"2026-12-25","status":0,"description":"为 Controller 层接口编写 JUnit 5 + MockMvc 自动化测试。"},{"id":8,"name":"大数据量分页性能优化","category":"性能优化","teacher":"丁玺润","deadline":"2027-01-05","status":0,"description":"对比物理分页与内存分页在大数据量下的性能差异。"}]}
+════════════════════════════════════════════════════════
+【接口2】   按 id 查询项目详情（@PathVariable，id=3）
+$ curl -s -i 'http://localhost:8080/api/projects/3'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:40 GMT
+
+{"code":200,"message":"success","data":{"id":3,"name":"实训成果统计报表","category":"数据分析","teacher":"李敏","deadline":"2026-11-30","status":0,"description":"按班级、项目维度统计实训提交率与平均得分。"}}
+════════════════════════════════════════════════════════
+【接口2-异常】   项目不存在（id=999）
+$ curl -s -i 'http://localhost:8080/api/projects/999'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:41 GMT
+
+{"code":404,"message":"实训项目不存在，id = 999","data":null}
+════════════════════════════════════════════════════════
+【接口2-异常】   路径变量类型不匹配（id=abc）
+$ curl -s -i 'http://localhost:8080/api/projects/abc'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:42 GMT
+
+{"code":400,"message":"参数 id 类型不正确，期望 Integer，实际收到：'abc'","data":null}
+════════════════════════════════════════════════════════
+【接口3】   分页查询 第1页 每页3条（@RequestParam）
+$ curl -s -i 'http://localhost:8080/api/projects/page?pageNum=1&pageSize=3'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:43 GMT
+
+{"code":200,"message":"success","data":{"records":[{"id":1,"name":"校园实训任务管理系统（CTTS）后端","category":"Web 后端","teacher":"丁玺润","deadline":"2026-12-31","status":1,"description":"基于 Spring Boot 3 构建实训任务发布、提交与评分接口。"},{"id":2,"name":"学生信息管理模块","category":"Web 后端","teacher":"丁玺润","deadline":"2026-11-15","status":1,"description":"实现学生信息的增删改查接口，并完成参数校验。"},{"id":3,"name":"实训成果统计报表","category":"数据分析","teacher":"李敏","deadline":"2026-11-30","status":0,"description":"按班级、项目维度统计实训提交率与平均得分。"}],"total":8,"pageNum":1,"pageSize":3,"pages":3}}
+════════════════════════════════════════════════════════
+【接口3】   分页查询 第2页 每页3条
+$ curl -s -i 'http://localhost:8080/api/projects/page?pageNum=2&pageSize=3'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:44 GMT
+
+{"code":200,"message":"success","data":{"records":[{"id":4,"name":"前后端分离接口联调","category":"Web 后端","teacher":"丁玺润","deadline":"2026-12-10","status":1,"description":"使用 Apifox 对全部 REST 接口进行调试与文档生成。"},{"id":5,"name":"任务提交记录导出","category":"工具开发","teacher":"王强","deadline":"2026-12-20","status":0,"description":"支持将学生提交记录导出为 Excel 文件。"},{"id":6,"name":"登录鉴权与 Token 校验","category":"Web 后端","teacher":"李敏","deadline":"2026-12-05","status":2,"description":"基于拦截器实现 JWT 登录鉴权与接口权限控制。"}],"total":8,"pageNum":2,"pageSize":3,"pages":3}}
+════════════════════════════════════════════════════════
+【接口3】   不传参数，走 defaultValue 默认值
+$ curl -s -i 'http://localhost:8080/api/projects/page'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:44 GMT
+
+{"code":200,"message":"success","data":{"records":[{"id":1,"name":"校园实训任务管理系统（CTTS）后端","category":"Web 后端","teacher":"丁玺润","deadline":"2026-12-31","status":1,"description":"基于 Spring Boot 3 构建实训任务发布、提交与评分接口。"},{"id":2,"name":"学生信息管理模块","category":"Web 后端","teacher":"丁玺润","deadline":"2026-11-15","status":1,"description":"实现学生信息的增删改查接口，并完成参数校验。"},{"id":3,"name":"实训成果统计报表","category":"数据分析","teacher":"李敏","deadline":"2026-11-30","status":0,"description":"按班级、项目维度统计实训提交率与平均得分。"}],"total":8,"pageNum":1,"pageSize":3,"pages":3}}
+════════════════════════════════════════════════════════
+【接口3-异常】   pageSize 超出 @Max 上限
+$ curl -s -i 'http://localhost:8080/api/projects/page?pageNum=1&pageSize=999'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:45 GMT
+
+{"code":400,"message":"page.pageSize 每页条数不能超过 50","data":null}
+════════════════════════════════════════════════════════
+【接口4】   新增项目（@RequestBody + @RequestHeader）
+$ curl -s -i -X POST 'http://localhost:8080/api/projects' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.demo' -d '{"name":"实训成果答辩系统","category":"Web 后端","teacher":"丁玺润","deadline":"2027-01-08","status":1,"description":"支持答辩分组、评分与结果公示。"}'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:46 GMT
+
+{"code":200,"message":"新增实训项目成功","data":{"id":9,"name":"实训成果答辩系统","category":"Web 后端","teacher":"丁玺润","deadline":"2027-01-08","status":1,"description":"支持答辩分组、评分与结果公示。"}}
+════════════════════════════════════════════════════════
+【接口4-异常】   请求体 @NotBlank 校验失败
+$ curl -s -i -X POST 'http://localhost:8080/api/projects' -H 'Content-Type: application/json' -d '{"name":"","category":"Web 后端"}'
+
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Thu, 17 Sep 2026 08:51:47 GMT
+
+{"code":400,"message":"项目名称不能为空","data":null}

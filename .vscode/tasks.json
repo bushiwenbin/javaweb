@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "mvn: 编译",
+      "type": "shell",
+      "command": "C:\\dev\\maven\\bin\\mvn.cmd",
+      "args": ["-B", "clean", "compile"],
+      "options": { "cwd": "${workspaceFolder}", "env": { "JAVA_HOME": "C:\\dev\\jdk-17" } },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "mvn: 打包（跳过测试）",
+      "type": "shell",
+      "command": "C:\\dev\\maven\\bin\\mvn.cmd",
+      "args": ["-B", "clean", "package", "-DskipTests"],
+      "options": { "cwd": "${workspaceFolder}", "env": { "JAVA_HOME": "C:\\dev\\jdk-17" } },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "mvn: 跑单元测试",
+      "type": "shell",
+      "command": "C:\\dev\\maven\\bin\\mvn.cmd",
+      "args": ["-B", "test"],
+      "options": { "cwd": "${workspaceFolder}", "env": { "JAVA_HOME": "C:\\dev\\jdk-17" } },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "mvn: 启动应用",
+      "type": "shell",
+      "command": "C:\\dev\\maven\\bin\\mvn.cmd",
+      "args": ["-B", "spring-boot:run"],
+      "options": { "cwd": "${workspaceFolder}", "env": { "JAVA_HOME": "C:\\dev\\jdk-17" } },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "mvn: 运行打包好的 jar",
+      "type": "shell",
+      "command": "C:\\dev\\jdk-17\\bin\\java.exe",
+      "args": ["-jar", "${workspaceFolder}\\target\\javaweb-0.0.1-SNAPSHOT.jar"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+mysql> SELECT id, username, real_name, role, status, deleted FROM sys_user ORDER BY id;
+id	username	real_name	role	status	deleted
+1	admin	系统管理员	ADMIN	1	0
+2	dingxr	丁玺润	TEACHER	1	0
+3	limin	李敏	TEACHER	1	0
+4	wangqiang	王强	TEACHER	1	0
+5	2024001	皮宸西	STUDENT	1	0
+6	2024002	张伟	STUDENT	1	0
+7	2024003	李娜	STUDENT	0	0
+8	2024008	赵敏	TEACHER	0	1
+
+mysql> SELECT id, project_name, category, teacher, deadline, status FROM training_project ORDER BY id;
+id	project_name	category	teacher	deadline	status
+1	校园实训任务管理系统（CTTS）后端	Web 后端	丁玺润	2026-12-31	1
+2	学生信息管理模块	Web 后端	丁玺润	2026-11-15	1
+3	实训成果统计报表	数据分析	李敏	2026-11-30	2
+4	前后端分离接口联调	Web 后端	丁玺润	2026-12-10	1
+5	任务提交记录导出	工具开发	王强	2026-12-20	0
+6	登录鉴权与 Token 校验	Web 后端	李敏	2026-12-05	2
+7	接口自动化测试用例	测试	王强	2026-12-25	0
+8	大数据量分页性能优化	性能优化	丁玺润	2027-01-05	0
+
+mysql> SELECT COUNT(*) AS 有效用户数 FROM sys_user WHERE deleted = 0;
+valid_users
+7
+mysql> SELECT COUNT(*) AS 全部用户数 FROM sys_user;
+all_users
+8

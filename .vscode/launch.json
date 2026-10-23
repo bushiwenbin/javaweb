@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "启动 JavawebApplication",
+      "request": "launch",
+      "mainClass": "com.example.javaweb.JavawebApplication",
+      "projectName": "javaweb",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "env": {
+        "SPRING_PROFILES_ACTIVE": "dev"
+      },
+      "vmArgs": "-Dfile.encoding=UTF-8"
+    },
+    {
+      "type": "java",
+      "name": "调试当前打开的 Java 文件",
+      "request": "launch",
+      "mainClass": "${file}",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "java",
+      "name": "启动并挂起等待调试器（排查启动期问题）",
+      "request": "launch",
+      "mainClass": "com.example.javaweb.JavawebApplication",
+      "projectName": "javaweb",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole"
+    }
+  ]
+}

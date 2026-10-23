@@ -1,0 +1,38 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE / VS Code
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.classpath
+.project
+.settings/
+bin/
+
+# 日志与临时文件
+*.log
+logs/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node.js 依赖（体积大，不要提交）
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# 本地工具记忆/状态
+.workbuddy/

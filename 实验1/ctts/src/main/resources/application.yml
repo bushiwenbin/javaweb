@@ -1,0 +1,43 @@
+server:
+  # 服务端口
+  port: 8080
+  # 内嵌 Tomcat 的 URI 编码
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: ctts
+  # 数据源：MySQL
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ctts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    # HikariCP 连接池
+    hikari:
+      pool-name: CttsHikariPool
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    # 开启驼峰命名自动映射：数据库 user_name -> 实体 userName
+    map-underscore-to-camel-case: true
+    # 开发期把 SQL 打印到控制台，便于调试
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      # 主键策略：数据库自增
+      id-type: auto
+
+# 应用元信息
+info:
+  app:
+    name: 校园实训任务管理系统（CTTS）
+    version: 0.0.1-SNAPSHOT

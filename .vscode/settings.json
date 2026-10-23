@@ -1,0 +1,105 @@
+{
+  // ===== Java 运行时：锁定到 C:\dev 下的 JDK 17 =====
+  "java.jdt.ls.java.home": "C:\\dev\\jdk-17",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "C:\\dev\\jdk-17",
+      "default": true
+    }
+  ],
+
+  // ===== Maven =====
+  "maven.executable.path": "C:\\dev\\maven\\bin\\mvn.cmd",
+  "java.configuration.maven.userSettings": "C:\\Users\\asus\\.m2\\settings.xml",
+  "java.configuration.maven.globalSettings": "C:\\dev\\maven\\conf\\settings.xml",
+  "maven.terminal.useJavaHome": true,
+  "maven.terminal.customEnv": [
+    {
+      "environmentVariable": "JAVA_HOME",
+      "value": "C:\\dev\\jdk-17"
+    }
+  ],
+
+  // ===== Spring Boot 插件 =====
+  "spring-boot.ls.java.home": "C:\\dev\\jdk-17",
+
+  // ===== 编码：中文项目必须锁死 UTF-8 =====
+  "files.encoding": "utf8",
+  "files.autoGuessEncoding": false,
+  "[java]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  },
+  "[xml]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+  "[properties]": {
+    "editor.tabSize": 4
+  },
+
+  // ===== 编辑体验 =====
+  "editor.formatOnSave": false,
+  "java.saveActions.organizeImports": true,
+  "java.autobuild.enabled": true,
+  "java.import.maven.enabled": true,
+  "java.import.gradle.enabled": false,
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.completion.importOrder": ["java", "javax", "com", "org"],
+  "java.debug.settings.hotCodeReplace": "auto",
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.test.defaultConfig": "",
+
+  // ===== 让 VS Code 内置终端也带上正确的 JAVA_HOME =====
+  "terminal.integrated.env.windows": {
+    "JAVA_HOME": "C:\\dev\\jdk-17",
+    "MAVEN_HOME": "C:\\dev\\maven",
+    "PATH": "C:\\dev\\jdk-17\\bin;C:\\dev\\maven\\bin;${env:PATH}"
+  },
+
+  // ===== JavaScript / TypeScript / Vue =====
+  // 让 ESLint 和 Prettier 能正确识别 frontend 子目录
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  "npm.packageManager": "pnpm",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "vue.server.hybridMode": true,
+  "emmet.includeLanguages": { "vue-html": "html", "vue": "html" },
+
+  // 前端文件统一用 Prettier 格式化，且保存时自动格式化
+  "[javascript]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+  "[typescript]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+  "[vue]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode", "editor.formatOnSave": true },
+  "[json]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[html]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[css]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[scss]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.tabSize": 2, "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+  // ===== 排除目录，别让资源管理器被构建产物淹没 =====
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "search.exclude": {
+    "**/target": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/pnpm-lock.yaml": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/target/**": true,
+    "**/dist/**": true
+  }
+}

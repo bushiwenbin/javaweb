@@ -1,0 +1,74 @@
+server:
+  # 服务端口
+  port: 8080
+  # 内嵌 Tomcat 的 URI 编码
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: ctts
+  # 数据源：MySQL
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ctts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    # HikariCP 连接池
+    hikari:
+      pool-name: CttsHikariPool
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  # 实体类所在包：配置后 XML/注解中的 resultType 可直接写类名（如 User）
+  type-aliases-package: com.gzu.ctts.entity
+  configuration:
+    # 开启驼峰命名自动映射：数据库 real_name -> 实体 realName、create_time -> createTime
+    map-underscore-to-camel-case: true
+    # 开发期把 SQL 打印到控制台，便于调试（实验报告中「自动生成的 SQL」即来源于此）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      # 主键策略：数据库自增，等价于实体类 @TableId(type = IdType.AUTO)
+      id-type: auto
+      # 逻辑删除：@TableLogic 标注的字段，delete 语句会被自动改写成 update
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# 应用元信息
+info:
+  app:
+    name: 校园实训任务管理系统（CTTS）
+    version: 0.0.1-SNAPSHOT
+    experiment: 实验三 MyBatis-Plus 持久层开发
+
+# 接口文档：springdoc-openapi（供 Apifox 导入）
+springdoc:
+  # OpenAPI 3 规范文件的访问地址：http://localhost:8080/v3/api-docs
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  # 内置的可视化调试界面：http://localhost:8080/swagger-ui.html
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    # 按 Controller 上的 @Tag 名称排序，便于与接口清单对照
+    tags-sorter: alpha
+    operations-sorter: method
+  # 扫描范围：只在 com.gzu.ctts 包下寻找 Controller
+  packages-to-scan: com.gzu.ctts
+  # 关闭默认的 /v3/api-docs.yaml 端点以外的冗余分组
+  default-produces-media-type: application/json
+
+# 日志级别：把本项目的日志打成 DEBUG，便于观察请求映射与参数绑定过程
+logging:
+  level:
+    com.gzu.ctts: debug
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
