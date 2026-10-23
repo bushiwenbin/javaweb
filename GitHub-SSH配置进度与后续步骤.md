@@ -1,4 +1,4 @@
-# GitHub SSH 配置进度与后续步骤
+﻿# GitHub SSH 配置进度与后续步骤
 
 > 参考文档：《GitHub 使用手册（SSH 方式）》
 > 保存时间：2026-10-22　最后更新：2026-10-23
@@ -54,6 +54,7 @@ ssh-keygen -t rsa -b 4096 -C "484360835@qq.com" -f "$env:USERPROFILE\.ssh\id_rsa
 | 已排除的大目录 | `frontend/node_modules`（144.3 MB / 7267 个文件）、`target/`、`.idea/` |
 | 未纳入提交 | `.workbuddy/memory/`（本地 AI 助手记忆，含本机路径），如需纳入见下方命令 |
 | 工作区状态 | 干净，`git status` 无未提交改动 |
+| SSH 认证 | ✅ 2026-10-23 通过，`ssh -T git@github.com` 返回 `Hi bushiwenbin!` |
 | 远程仓库 | **尚未添加**（GitHub 上还没建仓库），所以还不能 push |
 
 ### 如果想让 .workbuddy/ 也进仓库
@@ -74,7 +75,10 @@ git push -u origin main
 
 ---
 
-## 二、待完成的部分（等能访问 GitHub 时做）
+## 二、SSH 认证（✅ 2026-10-23 已完成）
+
+> 结果：`ssh -T git@github.com` 返回 `Hi bushiwenbin! You've successfully authenticated, but GitHub does not provide shell access.`
+> 说明公钥已成功添加到 GitHub，SSH 认证全流程打通。下面保留原始步骤，供以后换机器时参考。
 
 ### 第 1 步　登录 GitHub
 打开 <https://github.com/login>，用邮箱 `484360835@qq.com` 和你的账号密码登录（如有两步验证，验证码需自己输入）。
@@ -100,6 +104,15 @@ Hi bushiwenbin! You've successfully authenticated, but GitHub does not provide s
 
 如果仍显示 `Permission denied (publickey)`，说明公钥还没保存成功，回到第 2 步重做。
 
+**本次实际结果（2026-10-23）：已通过 ✅**
+
+```plain
+Hi bushiwenbin! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+指纹核对：`ssh-keygen -lf "$env:USERPROFILE\.ssh\id_rsa.pub"` → `4096 SHA256:w28mC+xYyJk1kDwa1s23myaXmu6+6SJEGOD4fODd5rE 484360835@qq.com (RSA)`
+（`ssh -T` 退出码是 1，属正常现象，GitHub 不提供 shell。）
+
 ### 第 4 步　（可选）ssh-agent
 本机 `ssh-agent` 服务当前是 **Disabled** 且启动需要管理员权限，所以这一步没做。
 因为密钥没有密码，**不做也不影响使用**。确实想要的话，用**管理员身份的 PowerShell** 执行一次：
@@ -110,7 +123,8 @@ Start-Service ssh-agent
 ssh-add "$env:USERPROFILE\.ssh\id_rsa"
 ```
 
-### 第 5 步　首次推送（把本地项目传到 GitHub）
+### 第 5 步　首次推送（⬅️ 唯一剩下的一步）
+> 注意：`git init`、`git add .`、`git commit`、`git branch -M main` 本机已执行完毕（见"一·二"），下面只有 `git remote add` 和 `git push` 需要执行。
 先在 GitHub 网页上新建**空仓库**（不要勾选 README / .gitignore / License），然后复制它的 SSH 地址 `git@github.com:bushiwenbin/仓库名.git`：
 
 ```powershell
